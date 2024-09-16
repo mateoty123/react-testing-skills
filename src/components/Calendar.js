@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import Paper from '@mui/material/Paper'
 import FormGroup from '@mui/material/FormGroup'
 import Checkbox from '@mui/material/Checkbox'
@@ -17,11 +15,14 @@ import {
   DateNavigator,
   Appointments,
   TodayButton,
+  ViewSwitcher,
+  DayView
 } from '@devexpress/dx-react-scheduler-material-ui'
 import {
   ViewState,
   EditingState,
   IntegratedEditing,
+  
 } from '@devexpress/dx-react-scheduler'
 import {
   WeekView,
@@ -33,8 +34,9 @@ import {
 import { appointments } from './demo-data/appointments'
 import { t } from 'i18next'
 import { Today } from '@mui/icons-material'
-import { months } from 'moment'
+import { months, now } from 'moment'
 import pl from 'date-fns/locale/pl'
+import { Dayjs } from 'dayjs';
 
 
 loadMessages(plMessages)
@@ -214,12 +216,13 @@ export default function Calendar() {
             />
 
             <IntegratedEditing />
-
+            
             <ViewState
               currentDate={currentDate}
               defaultCurrentDate='2018-07-27'
               onCurrentDateChange={setCurrentDate}
             />
+            
 
             <WeekView
             
@@ -229,12 +232,17 @@ export default function Calendar() {
             />
 
             <MonthView locale={pl} />
+            <DayView/>
+            <Appointments />
+            
             <Toolbar />
+            <ViewSwitcher/>
+            
             <DateNavigator />
 
             <TodayButton messages={{ today: t('today') }} />
-
-            <Appointments />
+            
+            
 
             <AppointmentTooltip
               showOpenButton

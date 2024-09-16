@@ -1,5 +1,5 @@
 import i18n from 'i18next'
-import { months } from 'moment'
+
 
 import { initReactI18next } from 'react-i18next'
 
